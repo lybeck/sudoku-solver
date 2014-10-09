@@ -1,4 +1,7 @@
+# the build folders and files
 build
 dist
 .dep.inc
 
+# symlink to make testing easier
+sudoku
