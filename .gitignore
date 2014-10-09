@@ -3,5 +3,6 @@ build
 dist
 .dep.inc
 
-# symlink to make testing easier
-sudoku
+# symlinks to make testing easier
+sudoku-debug
+sudoku-release
