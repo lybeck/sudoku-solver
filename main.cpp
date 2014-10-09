@@ -83,6 +83,12 @@ int main(int argc, char** argv) {
     sudoku sudoku;
 
     sudoku = read_sudoku(&n);
+    
+#ifndef NDEBUG
+    cout << endl << "Input: " << endl;
+    print_sudoku_readable(sudoku, n);
+    cout << endl;
+#endif
 
     bool solved = solve(sudoku, n);
 
@@ -90,10 +96,12 @@ int main(int argc, char** argv) {
 #ifdef NDEBUG
         print_sudoku(sudoku, n);
 #else
+        cout << endl << "Result:" << endl;
         print_sudoku_readable(sudoku, n);
+        cout << endl;
 #endif
     } else {
-        cout << "Impossible";
+        cout << "Impossible" << endl;
 #ifndef NDEBUG
         print_sudoku_readable(sudoku, n);
 #endif
