@@ -6,6 +6,7 @@
  */
 
 #include <cstdlib>
+#include <ios>
 #include <iostream>
 #include "io.h"
 #include "solver.h"
@@ -16,6 +17,10 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
+
+#ifdef NDEBUG
+    ios::sync_with_stdio(false);
+#endif
 
     int n;
     sudoku sudoku;
