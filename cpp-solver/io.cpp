@@ -1,6 +1,7 @@
 
 #include <cmath>
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <iomanip>
 #include "io.h"
@@ -15,13 +16,20 @@ inline int number_of_digits(int i) {
     return number_of_digits;
 }
 
-sudoku read_sudoku(int* n) {
-    std::cin >> *n;
+sudoku read_sudoku(const char* filename, int* n) {
+    
+#ifndef NDEBUG
+    std::cout << std::endl << "Filename: " << filename << std::endl;
+#endif
+    
+    std::ifstream file(filename);
+    
+    file >> *n;
     int nums = pow(*n, 4);
     int* sudoku = new int[nums];
 
     for (int i = 0; i < nums; i++) {
-        std::cin >> sudoku[i];
+        file >> sudoku[i];
     }
 
     return sudoku;

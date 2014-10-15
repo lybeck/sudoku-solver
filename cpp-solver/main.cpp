@@ -18,6 +18,11 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
+    if (argc != 2) {
+        cerr << "No input file as runtime argument! Exiting." << std::endl;
+        return 1;
+    }
+    
 #ifdef NDEBUG
     ios::sync_with_stdio(false);
 #endif
@@ -25,7 +30,7 @@ int main(int argc, char** argv) {
     int n;
     sudoku sudoku;
 
-    sudoku = read_sudoku(&n);
+    sudoku = read_sudoku(argv[1], &n);
     
 #ifndef NDEBUG
     cout << endl << "Input: " << endl;

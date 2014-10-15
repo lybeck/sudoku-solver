@@ -10,7 +10,7 @@
 #ifndef IO_H
 #define	IO_H
 
-sudoku read_sudoku(int*);
+sudoku read_sudoku(const char*, int*);
 
 void print_sudoku(sudoku, int);
 
