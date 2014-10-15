@@ -9,7 +9,9 @@
         <group name="sudoku">
             <file>file:/home/lasse/NetBeansProjects/sudoku/Sudoku/solver.cpp</file>
             <file>file:/home/lasse/NetBeansProjects/sudoku/Sudoku/solver.h</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/Sudoku/io.cpp</file>
             <file>file:/home/lasse/NetBeansProjects/sudoku/Sudoku/main.cpp</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/Sudoku/io.h</file>
         </group>
     </open-files>
 </project-private>

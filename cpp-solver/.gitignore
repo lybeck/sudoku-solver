@@ -1,0 +1,8 @@
+# the build folders and files
+/build
+/dist
+/.dep.inc
+
+# symlinks to make testing easier
+/sudoku-debug
+/sudoku-release
