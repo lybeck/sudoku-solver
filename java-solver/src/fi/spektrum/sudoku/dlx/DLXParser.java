@@ -138,6 +138,7 @@ public class DLXParser {
         node.setUp(column.getUp());
         column.setUp(node);
         node.setDown(column);
-        column.setSize(column.getSize() + 1);
+        node.setColumn(column);
+        column.increaseSize();
     }
 }

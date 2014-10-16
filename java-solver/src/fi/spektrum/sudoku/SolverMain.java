@@ -1,5 +1,6 @@
 package fi.spektrum.sudoku;
 
+import fi.spektrum.sudoku.dlx.DLXSolver;
 import fi.spektrum.sudoku.solver.AbstractSolver;
 import fi.spektrum.sudoku.solver.Reader;
 import fi.spektrum.sudoku.util.Timer;
@@ -16,12 +17,12 @@ public class SolverMain {
         
 //        File f = checkInput(args);
         
-        String path = "test-files/3-1.in";
+        String path = "test-files/2-1.in";
         File f = new File(path);
 
         Reader reader = new Reader(new FileInputStream(f));
 
-        AbstractSolver solver = new MySolver(reader);
+        AbstractSolver solver = new DLXSolver(reader);
 
         // solver.printBoard(solver.getBoard());
         solver.solve();
