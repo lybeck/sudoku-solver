@@ -12,10 +12,11 @@ public abstract class AbstractSolver {
     public AbstractSolver(Reader reader) {
         try {
             n = reader.nextInt();
-            board = new Integer[n * n][n * n];
+            int n2 = n * n;
+            board = new Integer[n2][n2];
 
-            for (int row = 0; row < n * n; row++) {
-                for (int col = 0; col < n * n; col++) {
+            for (int row = 0; row < n2; row++) {
+                for (int col = 0; col < n2; col++) {
                     board[row][col] = reader.nextInt();
                 }
             }
@@ -28,8 +29,7 @@ public abstract class AbstractSolver {
     public abstract void solve();
 
     /**
-     * This method returns an array where the dimensions are:
-     * Integer[rows][cols].
+     * This method returns an array where the dimensions are: Integer[rows][cols].
      * <p>
      * Fields with the value 0 (zero) are empty fields.
      * <p>
@@ -48,11 +48,11 @@ public abstract class AbstractSolver {
      * <p>
      * @return
      */
-    public int getBlockSize() {
+    public int getN() {
         return n;
     }
 
-    public int getBoardSize() {
+    public int getN2() {
         return board.length;
     }
 
