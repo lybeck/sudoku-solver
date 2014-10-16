@@ -7,7 +7,6 @@ package fi.spektrum.sudoku.dlx;
 public class ColumnNode extends Node {
 
     private int size;
-    private int name;
 
     public int getSize() {
         return size;
@@ -15,14 +14,6 @@ public class ColumnNode extends Node {
 
     public void setSize(int size) {
         this.size = size;
-    }
-
-    public int getName() {
-        return name;
-    }
-
-    public void setName(int name) {
-        this.name = name;
     }
 
     @Override

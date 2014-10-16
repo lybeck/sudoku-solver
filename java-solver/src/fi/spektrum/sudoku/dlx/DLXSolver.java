@@ -2,7 +2,6 @@ package fi.spektrum.sudoku.dlx;
 
 import fi.spektrum.sudoku.solver.AbstractSolver;
 import fi.spektrum.sudoku.solver.Reader;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -13,7 +12,7 @@ import java.util.TreeMap;
 public class DLXSolver extends AbstractSolver {
 
     private final ColumnNode header;
-    private Map<Integer, Node> o;
+    private final Map<Integer, Node> o;
     private boolean solved;
 
     public DLXSolver(Reader reader) {
@@ -30,9 +29,6 @@ public class DLXSolver extends AbstractSolver {
 
     private void search(int k) {
         System.out.println("k = " + k);
-        if (solved) {
-            return;
-        }
         if (header.getRight() == header) {
             // done!
             System.out.println("Found solution!");
@@ -65,8 +61,8 @@ public class DLXSolver extends AbstractSolver {
         ColumnNode best = null;
         for (ColumnNode c = h.getRight(); c != h; c = c.getRight()) {
             if (c.getSize() < min) {
-                best = c;
-                min = c.getSize();
+                    best = c;
+                    min = c.getSize();
             }
         }
         return best;

@@ -24,7 +24,7 @@ public class DLXParser {
         n2 = sudoku.length;
         n = (int) Math.sqrt(n2);
         n4 = n2 * n2;
-        cols = 4 * n2 * n2;
+        cols = 4 * n4;
         indices = new int[4];
         nodes = new Node[4];
         header = parseSudoku();
@@ -71,7 +71,6 @@ public class DLXParser {
         ColumnNode curr;
         for (int i = 0; i < cols; i++) {
             curr = new ColumnNode();
-            curr.setName(i);
             curr.setUp(curr);
             curr.setDown(curr);
             curr.setLeft(prev);
