@@ -2,6 +2,7 @@ package fi.spektrum.sudoku;
 
 import fi.spektrum.sudoku.solver.AbstractSolver;
 import fi.spektrum.sudoku.solver.Reader;
+import fi.spektrum.sudoku.util.Timer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,7 +11,13 @@ public class SolverMain {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        File f = checkInput(args);
+        Timer timer = new Timer();
+        timer.tic();
+        
+//        File f = checkInput(args);
+        
+        String path = "test-files/3-1.in";
+        File f = new File(path);
 
         Reader reader = new Reader(new FileInputStream(f));
 
@@ -19,6 +26,8 @@ public class SolverMain {
         // solver.printBoard(solver.getBoard());
         solver.solve();
         solver.printBoard(solver.getBoard());
+        
+        timer.toc();
     }
 
     /**

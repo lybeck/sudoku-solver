@@ -71,6 +71,7 @@ public class DLXParser {
         ColumnNode curr;
         for (int i = 0; i < cols; i++) {
             curr = new ColumnNode();
+            curr.setName(i);
             curr.setUp(curr);
             curr.setDown(curr);
             curr.setLeft(prev);

@@ -7,13 +7,13 @@ import java.util.logging.Logger;
 public abstract class AbstractSolver {
 
     private int n;
-    private Integer[][] board;
+    private int[][] board;
 
     public AbstractSolver(Reader reader) {
         try {
             n = reader.nextInt();
             int n2 = n * n;
-            board = new Integer[n2][n2];
+            board = new int[n2][n2];
 
             for (int row = 0; row < n2; row++) {
                 for (int col = 0; col < n2; col++) {
@@ -35,11 +35,11 @@ public abstract class AbstractSolver {
      * <p>
      * @return
      */
-    public Integer[][] getBoard() {
+    public int[][] getBoard() {
         return board;
     }
 
-    public void setBoard(Integer[][] board) {
+    public void setBoard(int[][] board) {
         this.board = board;
     }
 
@@ -61,7 +61,7 @@ public abstract class AbstractSolver {
      * <p>
      * @param board
      */
-    public void printBoard(Integer[][] board) {
+    public void printBoard(int[][] board) {
 
         // Making the number format to be 1 character longer than the biggest
         // number has tokens.
@@ -73,13 +73,15 @@ public abstract class AbstractSolver {
         }
 
         // Creating the format string
-        StringBuilder format = new StringBuilder();
-        for (Integer item : board[0]) {
-            format.append("%").append(count).append("d");
-        }
+        String format = "%-" + count + "d";
 
-        for (Integer[] board1 : board) {
-            System.out.println(String.format(format.toString(), (Object[]) board1));
+        StringBuilder sb = new StringBuilder();
+        for (int[] row : board) {
+            for (int num : row) {
+                sb.append(String.format(format, num));
+            }
+            sb.append("\n");
         }
+        System.out.print(sb.toString());
     }
 }

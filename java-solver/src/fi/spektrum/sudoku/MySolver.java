@@ -2,25 +2,28 @@ package fi.spektrum.sudoku;
 
 import fi.spektrum.sudoku.solver.AbstractSolver;
 import fi.spektrum.sudoku.solver.Reader;
+import java.util.Arrays;
 
 public class MySolver extends AbstractSolver {
 
+    private final boolean[] values;
+
     public MySolver(Reader reader) {
         super(reader);
+        values = new boolean[getN2()];
     }
 
     @Override
     public void solve() {
 
-        Integer[][] board = new Integer[getN2()][getN2()];
+        int[][] board = new int[getN2()][getN2()];
         for (int row = 0; row < getN2(); row++) {
             System.arraycopy(getBoard()[row], 0, board[row], 0, getN2());
         }
-
         setBoard(solve2(board));
     }
 
-    private Integer[][] solve2(Integer[][] board) {
+    private int[][] solve2(int[][] board) {
 
         int n = 0;
         int direction = 1;
@@ -48,9 +51,9 @@ public class MySolver extends AbstractSolver {
         return board;
     }
 
-    private boolean noDouble(Integer[][] board, int row, int col) {
+    private boolean noDouble(int[][] board, int row, int col) {
 
-        boolean[] values = new boolean[getN2()];
+        Arrays.fill(values, false);
 
         for (int r = 0; r < getN2(); r++) {
             if (board[r][col] != 0) {
@@ -61,7 +64,7 @@ public class MySolver extends AbstractSolver {
             }
         }
 
-        values = new boolean[getN2()];
+        Arrays.fill(values, false);
 
         for (int c = 0; c < getN2(); c++) {
             if (board[row][c] != 0) {
@@ -77,7 +80,7 @@ public class MySolver extends AbstractSolver {
         int minCol = (col % getN()) * getN();
         int maxCol = minCol + getN();
 
-        values = new boolean[getN2()];
+        Arrays.fill(values, false);
 
         for (int r = minRow; r < maxRow; r++) {
             for (int c = minCol; c < maxCol; c++) {
