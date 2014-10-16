@@ -5,7 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include "io.h"
-#include "solver.h"
+#include "backtracking-solver.h"
 
 inline int number_of_digits(int i) {
     int number_of_digits = 0;

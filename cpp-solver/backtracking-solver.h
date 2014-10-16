@@ -8,9 +8,11 @@
 #ifndef SOLVER_H
 #define	SOLVER_H
 
-typedef int* sudoku;
+#include "sudoku.h"
 
-bool solve(sudoku, int);
+namespace bt_solver {
+    bool solve(sudoku, int);
+}
 
 #endif	/* SOLVER_H */
 

@@ -8,10 +8,33 @@
 #include <cstdlib>
 #include <ios>
 #include <iostream>
+#include "dlx-solver.h"
 #include "io.h"
-#include "solver.h"
+#include "backtracking-solver.h"
+#include "sudoku.h"
 
 using namespace std;
+
+const int bt_threshold = 3;
+
+inline bool solve_sudoku(sudoku s, int n) {
+
+#ifndef NDEBUG
+    cout << "n = " << n << endl;
+#endif
+
+    if (n <= bt_threshold) {
+#ifndef NDEBUG
+        cout << "Chose backtracking solver." << endl;
+#endif
+        return bt_solver::solve(s, n);
+    } else {
+#ifndef NDEBUG
+        cout << "Chose dlx solver." << endl;
+#endif
+        return dlx_solver::solve(s, n);
+    }
+}
 
 /*
  * 
@@ -22,40 +45,40 @@ int main(int argc, char** argv) {
         cerr << "No input file as runtime argument! Exiting." << std::endl;
         return 1;
     }
-    
+
 #ifdef NDEBUG
     ios::sync_with_stdio(false);
 #endif
 
     int n;
-    sudoku sudoku;
+    sudoku s;
 
-    sudoku = read_sudoku(argv[1], &n);
-    
+    s = read_sudoku(argv[1], &n);
+
 #ifndef NDEBUG
     cout << endl << "Input: " << endl;
-    print_sudoku_readable(sudoku, n);
+    print_sudoku_readable(s, n);
     cout << endl;
 #endif
 
-    bool solved = solve(sudoku, n);
+    bool solved = solve_sudoku(s, n);
 
     if (solved) {
 #ifdef NDEBUG
-        print_sudoku(sudoku, n);
+        print_sudoku(s, n);
 #else
         cout << endl << "Result:" << endl;
-        print_sudoku_readable(sudoku, n);
+        print_sudoku_readable(s, n);
         cout << endl;
 #endif
     } else {
         cout << "Impossible" << endl;
 #ifndef NDEBUG
-        print_sudoku_readable(sudoku, n);
+        print_sudoku_readable(s, n);
 #endif
     }
 
-    delete sudoku;
+    delete s;
 
     return 0;
 }

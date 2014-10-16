@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Sudoku
+PROJECTNAME=cpp-solver
 
 # Active Configuration
 DEFAULTCONF=Debug

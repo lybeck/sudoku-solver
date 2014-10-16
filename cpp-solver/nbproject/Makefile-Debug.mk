@@ -35,9 +35,12 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/backtracking-solver.o \
+	${OBJECTDIR}/column_node.o \
+	${OBJECTDIR}/dlx-solver.o \
 	${OBJECTDIR}/io.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/solver.o
+	${OBJECTDIR}/node.o
 
 
 # C Compiler Flags
@@ -58,11 +61,26 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/sudoku
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cpp-solver
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/sudoku: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cpp-solver: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/sudoku ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cpp-solver ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/backtracking-solver.o: backtracking-solver.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/backtracking-solver.o backtracking-solver.cpp
+
+${OBJECTDIR}/column_node.o: column_node.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/column_node.o column_node.cpp
+
+${OBJECTDIR}/dlx-solver.o: dlx-solver.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/dlx-solver.o dlx-solver.cpp
 
 ${OBJECTDIR}/io.o: io.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -74,10 +92,10 @@ ${OBJECTDIR}/main.o: main.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
-${OBJECTDIR}/solver.o: solver.cpp 
+${OBJECTDIR}/node.o: node.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/solver.o solver.cpp
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/node.o node.cpp
 
 # Subprojects
 .build-subprojects:
@@ -85,7 +103,7 @@ ${OBJECTDIR}/solver.o: solver.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/sudoku
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cpp-solver
 
 # Subprojects
 .clean-subprojects:
