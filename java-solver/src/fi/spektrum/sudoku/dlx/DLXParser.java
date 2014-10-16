@@ -1,8 +1,6 @@
 package fi.spektrum.sudoku.dlx;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,6 +16,8 @@ public class DLXParser {
     private final int cols;
     private final ColumnNode header;
     private Map<Integer, ColumnNode> columns;
+    int[] indices;
+    Node[] nodes;
 
     public DLXParser(int[][] sudoku) {
         this.sudoku = sudoku;
@@ -25,6 +25,8 @@ public class DLXParser {
         n = (int) Math.sqrt(n2);
         n4 = n2 * n2;
         cols = 4 * n2 * n2;
+        indices = new int[4];
+        nodes = new Node[4];
         header = parseSudoku();
     }
 
@@ -35,7 +37,7 @@ public class DLXParser {
     public final ColumnNode parseSudoku() {
 
         ColumnNode h = initHeader();
-        columns = initMap(h);
+        initMap(h);
 
         for (int i = 0; i < sudoku.length; ++i) {
             for (int j = 0; j < sudoku[i].length; ++j) {
@@ -63,55 +65,8 @@ public class DLXParser {
         return h;
     }
 
-    private int[][] getDLXMatrix(int[][] sudoku) {
-        List<int[]> list = new ArrayList<>();
-        for (int i = 0; i < sudoku.length; ++i) {
-            for (int j = 0; j < sudoku[i].length; ++j) {
-                int num = sudoku[i][j];
-                if (num != 0) {
-                    list.add(makeRow(i, j, num));
-                } else {
-                    for (int k = 1; k <= n2; k++) {
-                        list.add(makeRow(i, j, k));
-                    }
-                }
-            }
-        }
-        int[][] mat = list.toArray(new int[list.size()][cols]);
-        return mat;
-    }
-
-    private int[] makeRow(int i, int j, int num) {
-        int[] row = new int[cols];
-        int ind = n2 * i + j;
-        row[ind] = num;
-        row[n4 + n2 * i + (num - 1)] = num;
-        row[2 * n4 + n2 * j + (num - 1)] = num;
-        row[3 * n4 + n2 * getBoxNumber(i, j, n) + (num - 1)] = num;
-        return row;
-    }
-
-    private int getBoxNumber(int i, int j, int n) {
-        int ib = i / n;
-        int jb = j / n;
-        return ib * n + jb;
-    }
-
-    private void printMatrix(int[][] matrix) {
-        for (int[] row : matrix) {
-            for (int i : row) {
-                if (i != 0) {
-                    System.out.print(i);
-                } else {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        }
-    }
-
-    private Map<Integer, ColumnNode> initMap(ColumnNode h) {
-        Map<Integer, ColumnNode> map = new HashMap<>(cols);
+    private void initMap(ColumnNode h) {
+        columns = new HashMap<>(cols);
         ColumnNode prev = h;
         ColumnNode curr;
         for (int i = 0; i < cols; i++) {
@@ -120,22 +75,21 @@ public class DLXParser {
             curr.setDown(curr);
             curr.setLeft(prev);
             prev.setRight(curr);
-            map.put(i, curr);
+            columns.put(i, curr);
             prev = curr;
         }
         prev.setRight(h);
         h.setLeft(prev);
-        return map;
     }
 
     private void addRow(int i, int j, int num) {
-        Node[] nodes = getNodes(num);
-        int[] indices = getIndices(i, j, num);
-        addRowToSparseMatrix(nodes, indices);
+        setupNodes(num);
+        setupIndices(i, j, num);
+        addRowToSparseMatrix();
     }
 
-    private Node[] getNodes(int num) {
-        Node[] nodes = initNodes(num);
+    private void setupNodes(int num) {
+        initNodes(num);
         Node prev = nodes[0];
         Node curr;
         for (int i = 1; i < nodes.length; i++) {
@@ -146,11 +100,9 @@ public class DLXParser {
         }
         prev.setRight(nodes[0]);
         nodes[0].setLeft(prev);
-        return nodes;
     }
 
-    private Node[] initNodes(int num) {
-        Node[] nodes = new Node[4];
+    private void initNodes(int num) {
         nodes[0] = new Node();
         nodes[1] = new Node();
         nodes[2] = new Node();
@@ -158,19 +110,22 @@ public class DLXParser {
         for (Node node : nodes) {
             node.setValue(num);
         }
-        return nodes;
     }
 
-    protected int[] getIndices(int i, int j, int num) {
-        int[] inds = new int[4];
-        inds[0] = n2 * i + j;
-        inds[1] = n4 + n2 * i + (num - 1);
-        inds[2] = 2 * n4 + n2 * j + (num - 1);
-        inds[3] = 3 * n4 + n2 * getBoxNumber(i, j, n) + (num - 1);
-        return inds;
+    private void setupIndices(int i, int j, int num) {
+        indices[0] = n2 * i + j;
+        indices[1] = n4 + n2 * i + (num - 1);
+        indices[2] = 2 * n4 + n2 * j + (num - 1);
+        indices[3] = 3 * n4 + n2 * getBoxNumber(i, j, n) + (num - 1);
     }
 
-    private void addRowToSparseMatrix(Node[] nodes, int[] indices) {
+    private int getBoxNumber(int i, int j, int n) {
+        int ib = i / n;
+        int jb = j / n;
+        return ib * n + jb;
+    }
+
+    private void addRowToSparseMatrix() {
         for (int i = 0; i < nodes.length; i++) {
             addNodeToSparseMatrix(nodes[i], indices[i]);
         }
