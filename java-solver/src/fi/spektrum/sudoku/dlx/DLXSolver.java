@@ -13,12 +13,14 @@ import java.util.TreeMap;
 public class DLXSolver extends AbstractSolver {
 
     private final ColumnNode header;
-    Map<Integer, Node> o;
+    private Map<Integer, Node> o;
+    private boolean solved;
 
     public DLXSolver(Reader reader) {
         super(reader);
         header = new DLXParser(getBoard()).getHeader();
         o = new TreeMap<>();
+        solved = false;
     }
 
     @Override
@@ -27,43 +29,38 @@ public class DLXSolver extends AbstractSolver {
     }
 
     private void search(int k) {
-        
-        System.out.println("search");
         System.out.println("k = " + k);
-        
+        if (solved) {
+            return;
+        }
         if (header.getRight() == header) {
             // done!
             System.out.println("Found solution!");
             printSolution();
+            solved = true;
             return;
         }
         ColumnNode c = selectColumn(header);
         coverColumn(c);
-        Node r = c.getDown();
-        while (r != c) {
+        for (Node r = c.getDown(); r != c; r = r.getDown()) {
             o.put(k, r);
-            Node j = r.getRight();
-            while (j != r) {
+            for (Node j = r.getRight(); j != r; j = j.getRight()) {
                 coverColumn(j.getColumn());
-                j = j.getRight();
             }
             search(k + 1);
+            if (solved) {
+                return;
+            }
             r = o.get(k);
-            c = c.getRight();
-            j = r.getLeft();
-            while (j != r) {
+            c = r.getColumn();
+            for (Node j = r.getLeft(); j != r; j = j.getLeft()) {
                 uncoverColumn(j.getColumn());
-                j = j.getRight();
             }
             uncoverColumn(c);
-            r = r.getRight();
         }
     }
 
     private ColumnNode selectColumn(ColumnNode h) {
-        
-        System.out.println("selectColumn");
-        
         int min = Integer.MAX_VALUE;
         ColumnNode best = null;
         for (ColumnNode c = h.getRight(); c != h; c = c.getRight()) {
@@ -76,9 +73,6 @@ public class DLXSolver extends AbstractSolver {
     }
 
     private void coverColumn(ColumnNode c) {
-        
-        System.out.println("coverColumn");
-        
         c.getRight().setLeft(c.getLeft());
         c.getLeft().setRight(c.getRight());
         for (Node i = c.getDown(); i != c; i = i.getDown()) {
@@ -91,9 +85,6 @@ public class DLXSolver extends AbstractSolver {
     }
 
     private void uncoverColumn(ColumnNode c) {
-        
-        System.out.println("uncoverColumn");
-        
         for (Node i = c.getUp(); i != c; i = i.getUp()) {
             for (Node j = i.getLeft(); j != i; j = j.getLeft()) {
                 j.getColumn().increaseSize();
@@ -106,18 +97,22 @@ public class DLXSolver extends AbstractSolver {
     }
 
     private void printSolution() {
-        
+
         System.out.println("printSolution");
-        
+
         System.out.println("o.size() = " + o.size());
         System.out.println("Solution:");
-        int i = 0;
+
+        System.out.println("o = " + o);
+
+        int[][] board = getBoard();
+
         for (int k : o.keySet()) {
             Node node = o.get(k);
-            System.out.print(node.getValue() + " ");
-            if (((++i) % getN2()) == 0) {
-                System.out.println();
-            }
+            int index = node.getIndex();
+            int i = DLXUtil.getRow(index, getN2());
+            int j = DLXUtil.getColumn(index, getN2());
+            board[i][j] = node.getValue();
         }
     }
 

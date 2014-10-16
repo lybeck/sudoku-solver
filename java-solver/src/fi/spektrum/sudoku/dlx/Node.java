@@ -12,6 +12,7 @@ public class Node {
     private Node down;
     private ColumnNode column;
     private int value;
+    private int index;
 
     public Node getRight() {
         return right;
@@ -59,5 +60,13 @@ public class Node {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

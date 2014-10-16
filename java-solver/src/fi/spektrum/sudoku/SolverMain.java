@@ -17,7 +17,8 @@ public class SolverMain {
         
 //        File f = checkInput(args);
         
-        String path = "test-files/2-1.in";
+        String path = "test-files/3-x.in";
+//        String path = "3.s";
         File f = new File(path);
 
         Reader reader = new Reader(new FileInputStream(f));

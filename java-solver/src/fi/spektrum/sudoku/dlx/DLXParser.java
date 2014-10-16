@@ -84,17 +84,17 @@ public class DLXParser {
     }
 
     private void addRow(int i, int j, int num) {
-        setupNodes(num);
+        setupNodes(i, j, num);
         setupIndices(i, j, num);
         addRowToSparseMatrix();
     }
 
-    private void setupNodes(int num) {
-        initNodes(num);
+    private void setupNodes(int i, int j, int num) {
+        initNodes(i, j, num);
         Node prev = nodes[0];
         Node curr;
-        for (int i = 1; i < nodes.length; i++) {
-            curr = nodes[i];
+        for (int k = 1; k < nodes.length; k++) {
+            curr = nodes[k];
             curr.setLeft(prev);
             prev.setRight(curr);
             prev = curr;
@@ -103,13 +103,14 @@ public class DLXParser {
         nodes[0].setLeft(prev);
     }
 
-    private void initNodes(int num) {
+    private void initNodes(int i, int j, int num) {
         nodes[0] = new Node();
         nodes[1] = new Node();
         nodes[2] = new Node();
         nodes[3] = new Node();
         for (Node node : nodes) {
             node.setValue(num);
+            node.setIndex(DLXUtil.getIndex(i, j, n2));
         }
     }
 
