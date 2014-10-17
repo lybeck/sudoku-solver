@@ -15,7 +15,7 @@
 
 using namespace std;
 
-const int bt_threshold = 3;
+const int bt_threshold = 0;
 
 inline bool solve_sudoku(sudoku s, int n) {
 
@@ -25,12 +25,12 @@ inline bool solve_sudoku(sudoku s, int n) {
 
     if (n <= bt_threshold) {
 #ifndef NDEBUG
-        cout << "Chose backtracking solver." << endl;
+        cout << "Chose backtracking solver." << endl << endl;
 #endif
         return bt_solver::solve(s, n);
     } else {
 #ifndef NDEBUG
-        cout << "Chose dlx solver." << endl;
+        cout << "Chose dlx solver." << endl << endl;
 #endif
         return dlx_solver::solve(s, n);
     }

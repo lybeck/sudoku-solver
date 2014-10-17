@@ -11,6 +11,12 @@
 
 typedef int* sudoku;
 
+int& get(sudoku, int n2, int i, int j);
+
+int get_index(int n2, int i, int j);
+
+void get_coords(int n2, int index, int* i, int* j);
+
 
 #endif	/* SUDOKU_H */
 

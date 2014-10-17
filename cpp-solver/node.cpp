@@ -9,49 +9,63 @@
 
 namespace dlx {
 
-    node::node() : left_(*this), right_(*this), up_(*this), down_(*this), column_(*this) { }
-
-    node::node(node& col) : left_(*this), right_(*this), up_(*this), down_(*this), column_(col) { }
+    node::node() : left_(this), right_(this), up_(this), down_(this), column_(this), value_(0), index_(0) { }
 
     node::~node() { }
 
-    node& node::left() {
+    node*& node::left() {
         return left_;
     }
 
-    node& node::right() {
+    node*& node::right() {
         return right_;
     }
 
-    node& node::up() {
+    node*& node::up() {
         return up_;
     }
 
-    node& node::down() {
+    node*& node::down() {
         return down_;
     }
 
-    node& node::column() {
+    node*& node::column() {
         return column_;
     }
 
-    node& L(node& n) {
-        return n.left();
+    int& node::value() {
+        return value_;
+    }
+
+    int& node::index() {
+        return index_;
+    }
+
+    node*& L(node* n) {
+        return n->left();
+    }
+
+    node*& R(node* n) {
+        return n->right();
+    }
+
+    node*& U(node* n) {
+        return n->up();
+    }
+
+    node*& D(node* n) {
+        return n->down();
+    }
+
+    node*& C(node* n) {
+        return n->column();
     }
     
-    node& R(node& n) {
-        return n.left();
+    int& V(node* n) {
+        return n->value();
     }
     
-    node& U(node& n) {
-        return n.up();
-    }
-    
-    node& D(node& n){
-        return n.down();
-    }
-    
-    node& C(node& n) {
-        return n.column();
+    int& I(node* n) {
+        return n->index();
     }
 }

@@ -9,23 +9,13 @@
 
 namespace dlx {
 
-    column_node::column_node() : size_(0), name_("") { }
-
-    column_node::~column_node() { }
+    column_node::column_node() : size_(0) { }
 
     int& column_node::size() {
         return size_;
     }
 
-    std::string& column_node::name() {
-        return name_;
-    }
-
-    int& S(column_node& c) {
-        return c.size();
-    }
-
-    std::string& N(column_node& c) {
-        return c.name();
+    int& S(column_node* c) {
+        return c->size();
     }
 }

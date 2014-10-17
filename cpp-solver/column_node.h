@@ -13,20 +13,16 @@
 
 namespace dlx {
 
-    class column_node : node {
+    class column_node : public node {
     public:
         column_node();
         column_node(const column_node& orig) = delete;
-        virtual ~column_node();
         int& size();
-        std::string& name();
     private:
         int size_;
-        std::string name_;
     };
 
-    int& S(column_node&);
-    std::string& N(column_node&);
+    int& S(column_node*);
 }
 
 #endif	/* COLUMN_H */

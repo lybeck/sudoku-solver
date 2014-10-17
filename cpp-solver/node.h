@@ -13,27 +13,32 @@ namespace dlx {
     class node {
     public:
         node();
-        node(node&);
         node(const node&) = delete;
         virtual ~node();
-        node& left();
-        node& right();
-        node& up();
-        node& down();
-        node& column();
+        node*& left();
+        node*& right();
+        node*& up();
+        node*& down();
+        node*& column();
+        int& value();
+        int& index();
     private:
-        node& left_;
-        node& right_;
-        node& up_;
-        node& down_;
-        node& column_;
+        node* left_;
+        node* right_;
+        node* up_;
+        node* down_;
+        node* column_;
+        int value_;
+        int index_;
     };
 
-    node& L(node&);
-    node& R(node&);
-    node& U(node&);
-    node& D(node&);
-    node& C(node&);
+    node*& L(node*);
+    node*& R(node*);
+    node*& U(node*);
+    node*& D(node*);
+    node*& C(node*);
+    int& V(node*);
+    int& I(node*);
 
 }
 

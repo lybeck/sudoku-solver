@@ -37,10 +37,12 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/backtracking-solver.o \
 	${OBJECTDIR}/column_node.o \
+	${OBJECTDIR}/dlx-parser.o \
 	${OBJECTDIR}/dlx-solver.o \
 	${OBJECTDIR}/io.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/node.o
+	${OBJECTDIR}/node.o \
+	${OBJECTDIR}/sudoku.o
 
 
 # C Compiler Flags
@@ -77,6 +79,11 @@ ${OBJECTDIR}/column_node.o: column_node.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/column_node.o column_node.cpp
 
+${OBJECTDIR}/dlx-parser.o: dlx-parser.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/dlx-parser.o dlx-parser.cpp
+
 ${OBJECTDIR}/dlx-solver.o: dlx-solver.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -96,6 +103,11 @@ ${OBJECTDIR}/node.o: node.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/node.o node.cpp
+
+${OBJECTDIR}/sudoku.o: sudoku.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sudoku.o sudoku.cpp
 
 # Subprojects
 .build-subprojects:
