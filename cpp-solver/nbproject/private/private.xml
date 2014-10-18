@@ -6,6 +6,18 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="sudoku"/>
+        <group name="sudoku">
+            <file>file:/home/lasse/NetBeansProjects/sudoku/cpp-solver/dlx-parser.h</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/cpp-solver/node.cpp</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/cpp-solver/column_node.h</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/cpp-solver/sudoku.h</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/cpp-solver/sudoku.cpp</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/cpp-solver/dlx-solver.cpp</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/cpp-solver/node.h</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/cpp-solver/main.cpp</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/cpp-solver/column_node.cpp</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/cpp-solver/dlx-parser.cpp</file>
+            <file>file:/home/lasse/NetBeansProjects/sudoku/cpp-solver/backtracking-solver.cpp</file>
+        </group>
     </open-files>
 </project-private>

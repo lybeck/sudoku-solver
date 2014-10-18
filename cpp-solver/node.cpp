@@ -57,9 +57,9 @@ namespace dlx {
         return n->down();
     }
 
-    node*& C(node* n) {
-        return n->column();
-    }
+//    node*& C(node* n) {
+//        return n->column();
+//    }
     
     int& V(node* n) {
         return n->value();

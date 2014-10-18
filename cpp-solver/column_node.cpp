@@ -15,7 +15,27 @@ namespace dlx {
         return size_;
     }
 
+    column_node*& column_node::right() {
+        return (column_node*&) node::right();
+    }
+
+    column_node*& column_node::left() {
+        return (column_node*&) node::left();
+    }
+
     int& S(column_node* c) {
         return c->size();
+    }
+
+    column_node*& R(column_node* c) {
+        return c->right();
+    }
+
+    column_node*& L(column_node* c) {
+        return c->left();
+    }
+
+    column_node*& C(node* n) {
+        return (column_node*&) n->column();
     }
 }

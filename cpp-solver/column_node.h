@@ -18,11 +18,16 @@ namespace dlx {
         column_node();
         column_node(const column_node& orig) = delete;
         int& size();
+        column_node*& right();
+        column_node*& left();
     private:
         int size_;
     };
 
     int& S(column_node*);
+    column_node*& R(column_node*);
+    column_node*& L(column_node*);
+    column_node*& C(node*);
 }
 
 #endif	/* COLUMN_H */

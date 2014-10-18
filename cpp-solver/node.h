@@ -36,7 +36,7 @@ namespace dlx {
     node*& R(node*);
     node*& U(node*);
     node*& D(node*);
-    node*& C(node*);
+//    node*& C(node*);
     int& V(node*);
     int& I(node*);
 

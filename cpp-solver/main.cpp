@@ -32,7 +32,8 @@ inline bool solve_sudoku(sudoku s, int n) {
 #ifndef NDEBUG
         cout << "Chose dlx solver." << endl << endl;
 #endif
-        return dlx_solver::solve(s, n);
+        dlx::dlx_solver solver(s, n);
+        return solver.solve();
     }
 }
 
@@ -73,9 +74,6 @@ int main(int argc, char** argv) {
 #endif
     } else {
         cout << "Impossible" << endl;
-#ifndef NDEBUG
-        print_sudoku_readable(s, n);
-#endif
     }
 
     delete s;

@@ -15,9 +15,9 @@ namespace dlx {
     }
 
     dlx_parser::~dlx_parser() {
-        delete columns_;
-        delete indices_;
-        delete nodes_;
+//        delete columns_;
+//        delete indices_;
+//        delete nodes_;
     }
 
     column_node* dlx_parser::parse() {
@@ -78,7 +78,7 @@ namespace dlx {
                 if (num != 0) {
                     add_row(i, j, num);
                 } else {
-                    for (int k = 0; k < n2_; k++) {
+                    for (int k = 1; k <= n2_; k++) {
                         add_row(i, j, k);
                     }
                 }
