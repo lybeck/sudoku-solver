@@ -75,7 +75,6 @@ namespace dlx {
         cover_column(c);
         for (node* r = D(c); r != c; r = D(r)) {
             o_[k] = r;
-            sudoku_[I(r)] = V(r);
             for (node* j = R(r); j != r; j = R(j)) {
                 cover_column(C(j));
             }
@@ -138,7 +137,7 @@ namespace dlx {
         node* nd;
         int i, j;
         for (int k = 0; k < n4_; k++) {
-            nd = o_[i];
+            nd = o_[k];
             get_coords(n2_, I(nd), &i, &j);
             get(sudoku_, n2_, i, j) = V(nd);
         }

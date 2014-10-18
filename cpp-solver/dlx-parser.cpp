@@ -15,9 +15,9 @@ namespace dlx {
     }
 
     dlx_parser::~dlx_parser() {
-//        delete columns_;
-//        delete indices_;
-//        delete nodes_;
+        delete columns_;
+        delete indices_;
+        delete nodes_;
     }
 
     column_node* dlx_parser::parse() {
