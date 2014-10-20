@@ -54,9 +54,9 @@ namespace dlx {
     }
 
     void dlx_solver::search(int k) {
-        
+
 #ifndef NDEBUG
-//        std::cout << "k = " << k << std::endl;
+        //        std::cout << "k = " << k << std::endl;
 #endif
 
         if (R(h_) == h_) {
@@ -78,13 +78,16 @@ namespace dlx {
             for (node* j = R(r); j != r; j = R(j)) {
                 cover_column(C(j));
             }
+
             search(k + 1);
-            if (solved_) {
-                return;
-            }
+
             r = o_[k];
             for (node* j = L(r); j != r; j = L(j)) {
                 uncover_column(C(j));
+            }
+
+            if (solved_) {
+                break;
             }
         }
         uncover_column(c);
@@ -94,13 +97,16 @@ namespace dlx {
 
         column_node* c;
         int s = std::numeric_limits<int>::max();
-        int i = 0;
         for (column_node* j = R(h_); j != h_; j = R(j)) {
             if (S(j) < s) {
                 c = j;
                 s = S(j);
             }
-            ++i;
+
+            // This can be used as long as we can assume that we have a solution, else it should be removed!
+            if (s <= 1) {
+                return c;
+            }
         }
 
         return c;
