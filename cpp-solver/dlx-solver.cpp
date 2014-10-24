@@ -15,9 +15,6 @@
 
 namespace dlx {
 
-    typedef std::map<int, std::set<column_node*>* > map_type;
-    typedef std::set<column_node*> set_type;
-
     dlx_solver::dlx_solver(sudoku s, int n) : sudoku_(s), solved_(false), n_(n), n2_(n*n), n4_(n2_*n2_) {
 
         o_ = new node*[n4_];

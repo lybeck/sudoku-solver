@@ -9,7 +9,7 @@
 #define	DLX_SOLVER_H
 
 #include <map>
-#include <set>
+#include <unordered_set>
 
 #include "sudoku.h"
 #include "column_node.h"
@@ -19,6 +19,9 @@
 #endif
 
 namespace dlx {
+
+    typedef std::unordered_set<column_node*> set_type;
+    typedef std::map<int, set_type* > map_type;
 
     class dlx_solver {
     public:
@@ -35,8 +38,8 @@ namespace dlx {
         node** o_;
         column_node* h_;
         
-        std::map<int, std::set<column_node*>* > * map_;
-        std::map<int, std::set<column_node*>* > * all_sets_;
+        map_type* map_;
+        map_type* all_sets_;
         
 #ifndef NDEBUG
         file_writer* file_;
