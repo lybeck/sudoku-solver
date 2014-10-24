@@ -10,6 +10,7 @@
 
 #ifndef NDEBUG
 #include <iostream>
+#include "file_writer.h"
 #endif
 
 namespace dlx {
@@ -43,11 +44,19 @@ namespace dlx {
             std::cout << it->first << " -> " << it->second->size() << std::endl;
         }
 #endif
+        
+#ifndef NDEBUG
+        file_ = new file_writer("search_stats.txt");
+        file_->println(n_);
+#endif
 
     }
 
     dlx_solver::~dlx_solver() {
         delete o_;
+#ifndef NDEBUG
+        delete file_;
+#endif
         // TODO: should also delete all the nodes starting from the header..
     }
 
@@ -72,6 +81,10 @@ namespace dlx {
     }
 
     void dlx_solver::search(int k) {
+        
+#ifndef NDEBUG
+        file_->println(k);
+#endif
 
 #ifndef NDEBUG
         //        std::cout << "k = " << k << std::endl;

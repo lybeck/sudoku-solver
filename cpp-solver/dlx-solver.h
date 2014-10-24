@@ -14,6 +14,10 @@
 #include "sudoku.h"
 #include "column_node.h"
 
+#ifndef NDEBUG
+#include "file_writer.h"
+#endif
+
 namespace dlx {
 
     class dlx_solver {
@@ -33,6 +37,10 @@ namespace dlx {
         
         std::map<int, std::set<column_node*>* > * map_;
         std::map<int, std::set<column_node*>* > * all_sets_;
+        
+#ifndef NDEBUG
+        file_writer* file_;
+#endif
         
         column_node* parse();
         void search(int);

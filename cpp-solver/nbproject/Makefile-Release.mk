@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/column_node.o \
 	${OBJECTDIR}/dlx-parser.o \
 	${OBJECTDIR}/dlx-solver.o \
+	${OBJECTDIR}/file_writer.o \
 	${OBJECTDIR}/io.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/node.o \
@@ -88,6 +89,11 @@ ${OBJECTDIR}/dlx-solver.o: dlx-solver.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/dlx-solver.o dlx-solver.cpp
+
+${OBJECTDIR}/file_writer.o: file_writer.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/file_writer.o file_writer.cpp
 
 ${OBJECTDIR}/io.o: io.cpp 
 	${MKDIR} -p ${OBJECTDIR}
